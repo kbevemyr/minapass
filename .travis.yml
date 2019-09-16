@@ -1,0 +1,39 @@
+language: node_js
+node_js:
+- stable
+cache:
+  directories:
+  - node_modules
+script:
+- npm test
+- npm run build
+true:
+  branch: master
+env:
+  matrix:
+  - CLUSTER_NAME=gt16-first-cluster SERVICE_NAME=custom-gt16-service IMAGE_REPO_URL=athleticsapp-test-gt16
+  global:
+  - secure: a1iR0uu7OEqaAVOGbL6ghIgD0e02RjfaZI+ndgfeQIOHH4ter3mhjyGI1JemXKvi5Ehz2QJDxox+G25cGoATgNj3G5gR6p4K11c9HMTr1Lq1z75wFIvHCUHStCg8CyvCElFnTbaNxSA+g9mqtqOTH4snYP1281nNfWyeB1pU5Lwhkbpv6Jmj3Aghb1ftpVWZVHjk7d8yiQFENjO5roVJk9oRR6oj16Sf9DL+MJtcasodl79y+OgmWMvxWNuXjug7SbnHEugEnLkg3nc0MMI8n0MtTqnJX6iP4KYOwCDvHLE3mgOm3myceDcdsUqtmxoxJDQWESTyKHx9x6DNh7iCQI+/FuDstSMtC0JObPsNJnqpdqk8rVdNUND0ExGg55JDR8HNr0teblXwhwReUKoEaOb0gSRe6jDQgwa/haVHdLKsuscdWPJmf5Ix+YaMVah6qg9kyS9CBif5VgX6SrquvQrnHOiwXxTB/cHImY+i23S9G/stec2t7DB18TnuRZUWi4HL3BlRQSaTKaAzr73vwEDt8UYilBk5a4aLtCG74SYCSx93mMMgbkqU9G/SPye0yyMq7uBZperfV+aWbRy0l4Ol4D6KZkU1+I0KPNG7hENLjGQTCEvxxOKIxBmJNRxHFBfP3LsBjRH7h8gxwib4nP3qA1kUu1aHeeCCvQBwAbM=
+  - secure: CWLDbH++NI0kxmJX821GBcwwwwDbF0LDxm1ZPEQe+/4iQItP1qmxJuBlKw1sW5HjEYj8nRd6/Iob245fRsC8ydEex/3DVzfhMvAx9Q4TSi5DcKkCOA+huUCqqSL9BwXOnUzkVOVvY1wWYkdYWf32HOdU3Ps2MhXxU5qiMCyK7xNzJGKxb7X/gnjALA2G6rNv+yaM1VpA0X2PzZ092zHN2BNQmg1YUf8nLwjJ5Tkvvkhn1mFnhI9qBTcWZXNnpmYELoal60FmCRytU54HMj3ely5cy9afIxzjBEVQJhC7lm+ouMUT6iLIlE+Ro3RoTU3wpGqRSLDc34sOzF1/NafWzVcs6+qPe5G3NH/bwsnirqRx+E1fVuyL/t/tmBT4P4e2ZDb10QZtJ5jhmPv3B6RrFyymWShn66gB7hgcbTCkm9ObsKDwzYCaF71+ofijWGxXTWGLQZASIJCq6xwm9DRgtldyey1AP9sllrN65ceqO3dO1IGP5tz3diYXAetNJS4im+BtHjpKq3AaZ8bt8c/PdLLIO+BHmRgWT65Rajk7gT1f+vYbbTsdS84ARwoQJ70ecJ+ii+VViI+FJTvfAqGadipaYJ/uefxDD40CmftZvKrQiAt4J3Ux1WMx4Bm18Y24BVUW8Ls5CUO6eUJHZp6PO3jUICyDX7WHQ4yam+hoUUE=
+  - secure: QgQ3p0/L1SabyGx5GuQHVxWIvbJ19lXVLnqD9c+tCG6c+ZJwKxxgZqj8G2sBy3gzXLMB4sMZ0f1UbdltgyYY+OhW3VVGwam++mNKJFZS02MFPO/sN5DcvG91rqKe7iaaJnZcFnjlPxQquh7i+TGuDhcLJR+X79F/A26/50NjFseceKtSmRI5ZhU2yly5ob+rd3FuRUAogZzFkkUMX8xsjvEFj7mbTAOAOtw/uaxl0AohweB5n8kW4f5EWl52ejs9PMnwG3/TEX8wOBSxwooRljmO1OhlgW3AATw6AyO5omLYM6C6QQfXTZKtDl8y5xYclxcahZOi+Xs4WkyNWK6QLiGDhkCn/tWqXcIzD0xP4Y9Yt0PCjrW13gOcIyphD5memGiYav9Ha9aqXuAxbtsjhGNMq/++I+pX5XCbIgtABxI/LUDk0JdgxsQo+nzxCy53tmimEw0lwy+dUGOeiQMqTBEIrNBlS1vLo66uyOAuD/loy8BFkTeUy90YtFE/Q1mnZwXlzdKZVT6HxNcr4aNRJqUFva/fMul1IqyE8eB9Vrn0bBUspoH5uZ6ERMGAOU5bxWr0QlgrfLsGDiNZdnxnuuW7XI0ajEOOLfVML+o9Ce4r8Mxf7I8zfWHl6dZZ7yJQs/bkBGvwxC0fnCj6KiCnYQ29tFeB8j5ASk7I3+5K+bY=
+addons:
+  ssh_known_hosts:
+    - musen.bevemyr.com:2024
+    - 176.10.254.170:2024
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_07110abbf073_key -iv $encrypted_07110abbf073_iv
+  -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_rsa
+- echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- ssh-add /tmp/deploy_rsa
+- ssh -i /tmp/deploy_rsa -p 2024 travis@musen.bevemyr.com pwd
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: rsync -r --quiet -e "ssh -p 2024" $TRAVIS_BUILD_DIR/build travis@musen.bevemyr.com:www/crossfit/
+  on:
+    branch: master
+before_install:
+- openssl aes-256-cbc -K $encrypted_07110abbf073_key -iv $encrypted_07110abbf073_iv
+  -in deploy_rsa.enc -out ./deploy_rsa -d
