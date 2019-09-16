@@ -6,6 +6,9 @@ import './inline.css';
 class MyPlanItem extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      lala: "this and that",
+    }
   }
 
   handleDeletePlanItemEvent() {

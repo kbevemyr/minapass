@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import './inline.css';
 
-import NewPlanItemDialog from './NewPlanItemDialog';
+//import NewPlanItemDialog from './NewPlanItemDialog';
 import MyPlanItem from './MyPlanItem';
 
 class MyPlan extends Component {

@@ -45,6 +45,7 @@ class LoginDialog extends Component {
             <div className="location">
                 <label htmlFor="username">Epost</label>
                 <input type="text"
+                       autoComplete="username"
                        id="username"
                        name="username"
                        onChange={(e) => this.setState({unvalue: e.target.value})}
@@ -54,6 +55,7 @@ class LoginDialog extends Component {
             <div className="location">
                 <label htmlFor="passwd">Lösenord</label>
                 <input type="password"
+                       autoComplete="current-password"
                        id="passwd"
                        name="passwd"
                        minLength="8"
