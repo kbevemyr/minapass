@@ -1,3 +1,23 @@
+## Mina pass, crossfit API
+GET http://crossfit.bevemyr.com/crossfit/login?user=jojo&password=lullis
+GET http://crossfit.bevemyr.com/crossfit/send_reset_password?user=jojo
+GET http://crossfit.bevemyr.com/crossfit/reset_password?rpid=1234567890&password=lullis
+GET http://crossfit.bevemyr.com/crossfit/set_password?old_password=jojo&new_password=lullis
+GET http://crossfit.bevemyr.com/crossfit/set_user_password?username=jojo&password=lullis
+GET http://crossfit.bevemyr.com/crossfit/get_all_users
+GET http://crossfit.bevemyr.com/crossfit/get_named_user?username=jojo
+POST http://crossfit.bevemyr.com/crossfit/set_user?sid=1111111111
+POST http://crossfit.bevemyr.com/crossfit/set_user?username=bar
+POST http://crossfit.bevemyr.com/crossfit/add_user?username=jojo&password=lullis&role=user&foo=bar
+GET http://crossfit.bevemyr.com/crossfit/del_user?username=jojo
+
+man kan skicka med en sid som cookie eller argument. T. ex.
+
+http://crossfit.bevemyr.com/crossfit/get_all_users?sid=1111111111
+http://crossfit.bevemyr.com/crossfit/get_user?sid=1111111111
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
