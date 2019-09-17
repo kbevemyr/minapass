@@ -9,6 +9,7 @@ class LoginDialog extends Component {
   constructor(props) {
     super(props);
     this.handleLoginEvent = this.handleLoginEvent.bind(this);
+    console.log("LoginDialog constructor");
     this.state = {
       redirectToReferrer: false,
       unvalue: "",
@@ -25,8 +26,9 @@ class LoginDialog extends Component {
     console.log("got LoginEvent");
     loginUser(unvalue, pwvalue)
       .then((res) => {
-        this.setState({redirectToReferrer: true });
-        this.props.callback(res.sid);
+        console.log("after login "+JSON.stringify(res));
+        //this.setState({redirectToReferrer: true }, () => this.props.callback(res.sid));
+        this.props.callback(res.sid, () => this.setState({redirectToReferrer: true}));
       });
   }
 
@@ -34,7 +36,11 @@ class LoginDialog extends Component {
     let { from } = this.props.location.state || { from: { pathname: "/" } };
     let { redirectToReferrer } = this.state;
 
-    if (redirectToReferrer) return <Redirect to={from} />;
+    console.log("redirvalue "+JSON.stringify(redirectToReferrer));
+    if (redirectToReferrer) {
+      console.log("redir " + JSON.stringify(from));
+      return (<Redirect to={from} />);
+    }
 
     return (
       <div id="LoginDialogComponent">

@@ -11,10 +11,11 @@
       "src": "images/crossfitnorrort_logo_rund_cmyk_vitram.gif",
       "type": "image/gif",
       "sizes": "192x192"
-    }	    
+    }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "permissions": ["https://localhost/*", "cookies"]
 }

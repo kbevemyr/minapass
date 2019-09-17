@@ -16,6 +16,9 @@ man kan skicka med en sid som cookie eller argument. T. ex.
 http://crossfit.bevemyr.com/crossfit/get_all_users?sid=1111111111
 http://crossfit.bevemyr.com/crossfit/get_user?sid=1111111111
 
+http://crossfit.bevemyr.com/crossfit/book_user?sid=1111111111
+http://crossfit.bevemyr.com/crossfit/verify_user_credentials?sid=1111111111
+
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

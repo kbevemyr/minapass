@@ -11,6 +11,7 @@ import MyPlan from './MyPlan';
 import MySchema from './MySchema';
 
 function PrivateRoute({ component: Component, auth, data, cb, ...rest }) {
+  console.log("PrivateRoute " + JSON.stringify(Component) + " : "+JSON.stringify(auth));
   return (
     <Route
       {...rest}
@@ -36,11 +37,11 @@ function App() {
   const [sid, setSid] = useState("");
   const [isAuthenticated, setAuthenticated] = useState(false);
 
-  const authenticate = (newsid) => {
+  const authenticate = (newsid, last) => {
     console.log("authenticate: "+newsid);
     setAuthenticated((x) => true);
     setSid((y) => newsid);
-    initUserdata(newsid);
+    initUserdata(newsid, last);
   }
 
   const signout = () => {
@@ -49,8 +50,8 @@ function App() {
     updateUserdata(generateEmptyData());
   }
 
-  const initUserdata = (x) => {
-    getBookingUser(x).then((data) => updateUserdata((z) => data));
+  const initUserdata = (x, last) => {
+    getBookingUser(x).then((data) => { updateUserdata((z) => data); last(); });
   }
 
   const updatePlan = (plan) => {
@@ -67,6 +68,10 @@ function App() {
   const nop = () => {
     console.log("nop");
   }
+
+  //browser.cookie.get({name: 'sid'}).then((c) => updateUserdata(c.value));
+  var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)sid\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  console.log("cookieValue = "+document.cookie);
 
   return (
     <div className="App">
@@ -89,6 +94,9 @@ function App() {
           <b>App to automate your schedule at Crossfit Norrort</b>
 
           <ul>
+            <li>
+              <Link to="/">Welcome</Link>
+            </li>
             <li>
               <Link to="schema">Mina bokningar</Link>
             </li>

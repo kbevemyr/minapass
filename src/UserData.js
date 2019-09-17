@@ -95,10 +95,5 @@ export function loginUser(username, passwd) {
   const adr="http://crossfit.bevemyr.com/crossfit/login";
   const url=adr+"?user="+username+"&password="+passwd;
   return fetch(url)
-    .then((response) => {
-      return response.json();
-    })
-    .catch((response) => {
-      return null;
-    });
+    .then(response => response.json());
 }
