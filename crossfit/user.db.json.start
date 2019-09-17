@@ -1,0 +1,66 @@
+[
+ {
+  "username":"johan",
+  "password":"m9hbifDY23/6vX+X8iTF5A==",
+  "sid":"1234567890",
+  "confirmed":false,
+  "role":"admin",
+  "passwd_reset_id":"",
+  "passwd_reset_send_time":"",
+  "email":"jb@bevemyr.com",
+  "address":"Gosta Tamms väg 16",
+  "name":"Johan Bevemyr",
+  "bookingname": "johan@bevemyr.com",
+  "bookingpass": "tentamen",
+  "plan": [
+           {
+            "day": "monday",     
+            "time": "19.30",
+            "type": "pass"
+           }
+          ],
+  "booked": []
+ },
+ {
+  "username":"gt16",
+  "password":"sBe1pyaB35WYVCURKjgTmg==",
+  "sid":"12345678901",
+  "confirmed":false,
+  "role":"admin",
+  "passwd_reset_id":"",
+  "passwd_reset_send_time":"",
+  "email":"jb@bevemyr.com",
+  "address":"Gosta Tamms väg 16",
+  "name":"Gosta Tamms vag 16",
+  "plan": [],
+  "booked": []
+ },
+ {
+  "username":"katrin",
+  "password":"DWbiaxKB7oiaFdtWzfKbCg==",
+  "sid":"12345678902",
+  "confirmed":false,
+  "role":"admin",
+  "passwd_reset_id":"",
+  "passwd_reset_send_time":"",
+  "email":"jb@bevemyr.com",
+  "address":"Gosta Tamms väg 16",
+  "name":"Gosta Tamms vag 16",
+  "plan": [],
+  "booked": []
+ },
+ {
+  "username":"test",
+  "password":"CY9rzUYh03PK3k6DJie09g==",
+  "sid":"9012345678",
+  "confirmed":false,
+  "role":"user",
+  "passwd_reset_id":"",
+  "passwd_reset_send_time":"",
+  "email":"test@bevemyr.com",
+  "address":"Gosta Tamms väg 16",
+  "name":"Test user",
+  "plan": [],
+  "booked": []
+ }
+]
