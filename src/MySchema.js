@@ -9,7 +9,6 @@ class MySchema extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    	lala: "Schema for ",
       isBooked: this.props.userdata.booked !== ""
     }
   }
@@ -22,7 +21,7 @@ class MySchema extends Component {
       {this.state.isBooked &&
         <div>
           {
-            this.props.userdata.booked.map(x =>
+            this.props.userdata.booked.sort().map(x =>
               (
                 <MySchemaItem key={x.date.day+x.time} date={x.date} time={x.time} />
               )

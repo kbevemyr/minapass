@@ -11,15 +11,15 @@ class NewPlanItemDialog extends Component {
     this.state = {
       sDay: "",
       sTime: "",
-      sType: "",
-      exceptions: [],
+      sType: "coach",
     }
   }
 
   handleAddPlanItemEvent() {
     console.log("got AddPlanItemEvent");
-    console.log("data: "+this.state.sDay+", "+this.state.sTime+", "+this.state.sType);
-    this.props.callback();
+    let newPlanItem = {"record_name": "plan", "day": this.state.sDay,"time": this.state.sTime, "type": this.state.sType};
+    this.props.onAbort(); // borde tas bort och göras i onAdd funktionen
+    this.props.onAdd(newPlanItem);
   }
 
   render() {
@@ -42,7 +42,7 @@ class NewPlanItemDialog extends Component {
               />
 
               <p>Välj en klass</p>
-              <select id="selectPassType" onChange={(e) => this.setState({sType: e.target.value})} aria-label="Pass type">
+              <select id="selectPassType" defaultValue="coach" onChange={(e) => this.setState({sType: e.target.value})} aria-label="Pass type">
                 <option value="coach">coach</option>
                 <option value="manned">manned</option>
                 <option value="keycard">keycard</option>
@@ -51,7 +51,12 @@ class NewPlanItemDialog extends Component {
               </select>
 
               <div className="dialog-buttons">
-                <button id="butDialogCancel" className="button">Avbryt</button>
+                <button
+                  id="butDialogCancel"
+                  className="button"
+                  onClick={this.props.onAbort} >
+                    Avbryt
+                </button>
                 <button
                   id="butDialogAdd"
                   className="button"

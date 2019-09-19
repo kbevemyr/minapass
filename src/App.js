@@ -10,14 +10,15 @@ import LoginDialog from './LoginDialog';
 import MyPlan from './MyPlan';
 import MySchema from './MySchema';
 
-function PrivateRoute({ component: Component, auth, data, cb, ...rest }) {
-  console.log("PrivateRoute " + JSON.stringify(Component) + " : "+JSON.stringify(auth));
+function PrivateRoute(args) {
+  console.log("PrivateRoute "+JSON.stringify(args));
+  var { component: Component, auth: Auth, data: Data, callback: CB, ...rest } = args;
   return (
     <Route
       {...rest}
       render={props =>
-        auth ? (
-          <Component {...props} userdata={data} callback={cb}/>
+        Auth ? (
+          <Component {...props} userdata={Data} callback={CB}/>
         ) : (
           <Redirect
             to={{
@@ -31,47 +32,64 @@ function PrivateRoute({ component: Component, auth, data, cb, ...rest }) {
   );
 }
 
+function initApp() {
+  /* Init App */
+  // tycker inte att man ska nyttja gammal sid.
+  var cookieSid = document.cookie.replace(/(?:(?:^|.*;\s*)sid\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  console.log("cookieSid "+cookieSid);
+  if(cookieSid !== "") {
+    //updateUserdata(cookieSid, () => setAuthenticated(true));
+  }
+}
+
+
 // https://kentcdodds.com/blog/application-state-management-with-react
 function App() {
-  const [userdata, updateUserdata] = useState(generateEmptyData());
-  const [sid, setSid] = useState("");
+  const [userdata, setUserdata] = useState(generateEmptyData());
   const [isAuthenticated, setAuthenticated] = useState(false);
 
   const authenticate = (newsid, last) => {
     console.log("authenticate: "+newsid);
-    setAuthenticated((x) => true);
-    setSid((y) => newsid);
-    initUserdata(newsid, last);
+    setAuthenticated(true);
+    updateUserdata(newsid, last);
   }
 
   const signout = () => {
     console.log("signout");
-    setAuthenticated((x) => false);
-    updateUserdata(generateEmptyData());
+    setAuthenticated(false);
+    setUserdata(generateEmptyData());
   }
 
-  const initUserdata = (x, last) => {
-    getBookingUser(x).then((data) => { updateUserdata((z) => data); last(); });
+  const updateUserdata = (sidValue, closeFlowCb) => {
+    getBookingUser(sidValue).then((data) => {
+      if(data.plan === "") {
+        data.plan = [];
+      }
+      if(data.booked === "") {
+        data.booked = [];
+      }
+      setUserdata(data);
+      closeFlowCb(); //tänkt att den stänger inmatningsdialogen, bra?
+    });
   }
 
-  const updatePlan = (plan) => {
-    updateUserdata((p) => Object.assign({}, userdata, {
-      plan: p,
-    }))
+  const updatePlan = (newplan, closeFlowCb) => {
+    setUserdata((ud) => Object.assign({}, ud, {
+      plan: newplan,
+    }));
+    closeFlowCb();
+    // uppdatera servern, updateBookingUser()
   }
 
   const updateBookingUser = (x,y) => {
     console.log("updateBookingUser");
     setBookingUser(x,y).then((res) => console.log("done updateBookingUser"));
+    // on det blir fel så hämta nytt från servern?
   }
 
   const nop = () => {
     console.log("nop");
   }
-
-  //browser.cookie.get({name: 'sid'}).then((c) => updateUserdata(c.value));
-  var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)sid\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-  console.log("cookieValue = "+document.cookie);
 
   return (
     <div className="App">
@@ -84,7 +102,7 @@ function App() {
           </a>
         </h1>
         <button id="butInstall" aria-label="Install" hidden></button>
-        <button id="butRefresh" aria-label="Refresh" onClick={() => updateBookingUser(sid,userdata)}></button>
+        <button id="butRefresh" aria-label="Refresh" onClick={() => nop()}></button>
         <button id="butLogout" aria-label="Logout" onClick={signout}></button>
       </header>
 
@@ -109,28 +127,30 @@ function App() {
           </ul>
         </div>
 
-        <Switch>
-          <Route path="/login" render={() => <LoginDialog callback={ authenticate }/>} />
-          <Route path="/" exact component={Splash} />
-          <PrivateRoute path="/schema"
-            component={MySchema}
-            auth={isAuthenticated}
-            data={userdata}
-            callback={nop}
-          />
-          <PrivateRoute path="/plan"
-            component={MyPlan}
-            auth={isAuthenticated}
-            data={userdata}
-            callback={updatePlan}
-          />
-          <PrivateRoute path="/profile"
-            component={MyProfile}
-            auth={isAuthenticated}
-            data={userdata}
-            callback={nop}
-          />
-        </Switch>
+        <Route path="/login"
+          render={() => <LoginDialog callback={ authenticate }/>}
+        />
+        <Route path="/"
+          exact component={Splash}
+        />
+        <PrivateRoute path="/schema"
+          component={MySchema}
+          auth={isAuthenticated}
+          data={userdata}
+          callback={nop}
+        />
+        <PrivateRoute path="/plan"
+          component={MyPlan}
+          auth={isAuthenticated}
+          data={userdata}
+          callback={updatePlan}
+        />
+        <PrivateRoute path="/profile"
+          component={MyProfile}
+          auth={isAuthenticated}
+          data={userdata}
+          callback={nop}
+        />
 
       </main>
 

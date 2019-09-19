@@ -10,7 +10,7 @@ class MyPlan extends Component {
     super(props);
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
-    this.handleAddPlanItem = this.handleAddNewPlanItem.bind(this);
+    this.handleAddPlanItem = this.handleAddPlanItem.bind(this);
     this.state = {
       isPlanned: this.props.userdata.plan !== "",
       addDialog: false,
@@ -24,11 +24,13 @@ class MyPlan extends Component {
     this.setState({addDialog: false});
   }
 
-  handleAddNewPlanItem (newplanitem) {
-    console.log("got handleAddNewPlanItem "+JSON.stringify(newplanitem));
-    // Object.assign({}, this.props.userdata.plan, {newitem})
-    //this.props.onAdd(); reder dialog and do callback(newplan)
-    this.setState({addDialog: false});
+  handleAddPlanItem (newplanitem) {
+    console.log("got handleAddPlanItem "+JSON.stringify(newplanitem));
+    console.log("userdata: "+JSON.stringify(this.props.userdata));
+    //this.props.userdata.plan.push(newplanitem);
+    var newplan = this.props.userdata.plan;
+    newplan.push(newplanitem);
+    this.props.callback(newplan, this.handleCloseDialog);
   }
 
   render() {
@@ -58,7 +60,7 @@ class MyPlan extends Component {
       }
 
       {this.state.addDialog &&
-        <NewPlanItemDialog callback={this.handleAddNewPlanItem}/>
+        <NewPlanItemDialog onAdd={this.handleAddPlanItem} onAbort={this.handleCloseDialog} />
       }
       </div>
     );

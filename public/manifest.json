@@ -16,6 +16,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "permissions": ["https://localhost/*", "cookies"]
+  "background_color": "#ffffff"
 }

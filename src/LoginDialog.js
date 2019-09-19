@@ -27,7 +27,6 @@ class LoginDialog extends Component {
     loginUser(unvalue, pwvalue)
       .then((res) => {
         console.log("after login "+JSON.stringify(res));
-        //this.setState({redirectToReferrer: true }, () => this.props.callback(res.sid));
         this.props.callback(res.sid, () => this.setState({redirectToReferrer: true}));
       });
   }
