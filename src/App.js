@@ -74,18 +74,17 @@ function App() {
   }
 
   const updatePlan = (newplan, closeFlowCb) => {
-    setUserdata((ud) => Object.assign({}, ud, {
-      plan: newplan,
-    }));
-    closeFlowCb();
-    // uppdatera servern, updateBookingUser()
+    setUserdata((ud) => Object.assign({}, ud, {plan: newplan}));
+    setBookingUser(userdata.sid, userdata).then((res) => closeFlowCb());
   }
 
+/*
   const updateBookingUser = (x,y) => {
     console.log("updateBookingUser");
     setBookingUser(x,y).then((res) => console.log("done updateBookingUser"));
     // on det blir fel så hämta nytt från servern?
   }
+  */
 
   const nop = () => {
     console.log("nop");

@@ -13,7 +13,7 @@ class MyPlanItem extends Component {
 
   handleDeletePlanItemEvent() {
     console.log("got handleDeletePlanItemEvent");
-    //this.props.onCross(this.props.key);
+    this.props.onCross({day: this.props.day, time: this.props.time, type: this.props.type});
   }
 
   render() {

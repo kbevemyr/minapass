@@ -26,8 +26,6 @@ class MyPlan extends Component {
 
   handleAddPlanItem (newplanitem) {
     console.log("got handleAddPlanItem "+JSON.stringify(newplanitem));
-    console.log("userdata: "+JSON.stringify(this.props.userdata));
-    //this.props.userdata.plan.push(newplanitem);
     var newplan = this.props.userdata.plan;
     newplan.push(newplanitem);
     this.props.callback(newplan, this.handleCloseDialog);
