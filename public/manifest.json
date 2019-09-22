@@ -8,6 +8,11 @@
       "type": "image/x-icon"
     },
     {
+      "src": "images/CNlogga.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    },
+    {
       "src": "images/crossfitnorrort_logo_rund_cmyk_vitram.gif",
       "type": "image/gif",
       "sizes": "192x192"

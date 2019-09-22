@@ -175,6 +175,10 @@ body {
   background-image: url("/images/add.svg");
 }
 
+.icon.edit {
+  background-image: url("/images/add.svg");
+}
+
 .icon.out {
   background-image: url("/image/out24ps.svg");
 }

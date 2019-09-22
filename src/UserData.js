@@ -71,7 +71,8 @@ export function getBookingUser(sid) {
     });
 }
 
-export function setBookingUser(sid, userdata) {
+export function setBookingUser(userdata) {
+  let sid = userdata.sid;
   console.log("setBookingUser: "+sid);
   const adr="http://crossfit.bevemyr.com/crossfit/set_user";
   const url=adr+"?sid="+sid;

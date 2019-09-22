@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
+import { Route, Link, Redirect, withRouter } from 'react-router-dom';
 import './App.css';
 import './inline.css';
 import { getBookingUser, setBookingUser, generateEmptyData } from './UserData';
@@ -48,10 +48,10 @@ function App() {
   const [userdata, setUserdata] = useState(generateEmptyData());
   const [isAuthenticated, setAuthenticated] = useState(false);
 
-  const authenticate = (newsid, last) => {
-    console.log("authenticate: "+newsid);
+  const authenticate = (sid, last) => {
+    console.log("authenticate: " + sid);
     setAuthenticated(true);
-    updateUserdata(newsid, last);
+    updateUserdata(sid, last);
   }
 
   const signout = () => {
@@ -60,8 +60,8 @@ function App() {
     setUserdata(generateEmptyData());
   }
 
-  const updateUserdata = (sidValue, closeFlowCb) => {
-    getBookingUser(sidValue).then((data) => {
+  const updateUserdata = (sid, closeFlowCb) => {
+    getBookingUser(sid).then((data) => {
       if(data.plan === "") {
         data.plan = [];
       }
@@ -75,7 +75,12 @@ function App() {
 
   const updatePlan = (newplan, closeFlowCb) => {
     setUserdata((ud) => Object.assign({}, ud, {plan: newplan}));
-    setBookingUser(userdata.sid, userdata).then((res) => closeFlowCb());
+    setBookingUser(userdata).then((res) => closeFlowCb());
+  }
+
+  const updateProfile = (profiledata, closeFlowCb) => {
+    setUserdata((ud) => Object.assign({}, ud, profiledata));
+    setBookingUser(userdata).then((res) => closeFlowCb());
   }
 
 /*
@@ -148,7 +153,7 @@ function App() {
           component={MyProfile}
           auth={isAuthenticated}
           data={userdata}
-          callback={nop}
+          callback={updateProfile}
         />
 
       </main>

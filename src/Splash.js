@@ -8,7 +8,7 @@ class Splash extends Component {
     return (
       <div>
         <h1>Välkommen!</h1>
-        <img src="images/crossfitnorrort_logo_rund_cmyk_vitram.gif" alt="Crossfit Norrort" />
+        <img src="images/CNlogga.jpg" alt="Crossfit Norrort" />
       </div>
     );
   }

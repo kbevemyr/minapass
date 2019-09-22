@@ -1,31 +1,59 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
+import ProfileDialog from './ProfileDialog';
 import './inline.css';
 
 
 class MyProfile extends Component {
   constructor(props) {
     super(props);
+    this.handleOpenDialog = this.handleOpenDialog.bind(this);
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
+    this.handleProfileEditEvent = this.handleProfileEditEvent.bind(this);
     this.state = {
-      lala: "Profile for ",
-      passpresentation: this.props.userdata.bookingpass.replace(/\w/gi, 'x'),
+      isDialogMode: false,
+      passwordpresentation: this.props.userdata.bookingpass.replace(/\w/gi, 'x'),
     };
+  }
+
+  handleOpenDialog () {
+    this.setState({isDialogMode: true});
+  }
+  handleCloseDialog () {
+    this.setState({isDialogMode: false});
+  }
+
+  handleProfileEditEvent (x) {
+    console.log("got handleAddPlanItem "+JSON.stringify(x));
+    this.props.callback(x, this.handleCloseDialog);
   }
 
   render() {
     return (
-      <div id="MyProfileComponent" className="plan-card">
-        <div className="card-spinner" hidden>
-          <svg viewBox="0 0 32 32" width="32" height="32">
-            <circle cx="16" cy="16" r="14" fill="none"></circle>
-          </svg>
+      <div>
+        <button id="butEdit" className="fab" aria-label="Edit" onClick={this.handleOpenDialog}>
+          <span className="icon add"></span>
+        </button>
+
+        <div id="MyProfileComponent" className="plan-card">
+          <div className="card-spinner" hidden>
+            <svg viewBox="0 0 32 32" width="32" height="32">
+              <circle cx="16" cy="16" r="14" fill="none"></circle>
+            </svg>
+          </div>
+          <div className="location">{this.props.userdata.bookinguser}</div>
+          <div className="description">{this.state.passwordpresentation}</div>
+          <div className="description">{this.props.userdata.bookingpass}</div>
+          <div className="description">{this.props.userdata.bookingname}</div>
+          <div className="description">{this.props.userdata.bookingfull}</div>
         </div>
-        <div className="location">{this.props.userdata.bookinguser}</div>
-        <div className="description">{this.state.passpresentation}</div>
-        <div className="description">{this.props.userdata.bookingpass}</div>
-        <div className="description">{this.props.userdata.bookingname}</div>
-        <div className="description">{this.props.userdata.bookingfull}</div>
+
+        {this.state.isDialogMode &&
+          <ProfileDialog onAction={this.handleProfileEditEvent} onAbort={this.handleCloseDialog} />
+        }
       </div>
+
+
     );
   }
 }

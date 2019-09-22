@@ -11,6 +11,7 @@ class MyPlan extends Component {
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
     this.handleAddPlanItem = this.handleAddPlanItem.bind(this);
+    this.handleDeletePlanItem = this.handleDeletePlanItem.bind(this);
     this.state = {
       isPlanned: this.props.userdata.plan !== "",
       addDialog: false,
@@ -31,6 +32,12 @@ class MyPlan extends Component {
     this.props.callback(newplan, this.handleCloseDialog);
   }
 
+  handleDeletePlanItem (planitem) {
+    console.log("got handleAddPlanItem "+JSON.stringify(planitem));
+    let newplan = this.props.userdata.plan.filter((x) => {return (x.day !== planitem.day && x.time !== planitem.time && x.type !== planitem.type)});
+    this.props.callback(newplan, () => {console.log("item deleted: "+JSON.stringify(planitem))});
+  }
+
   render() {
     return (
       <div>
@@ -49,7 +56,7 @@ class MyPlan extends Component {
                   day={x.day}
                   time={x.time}
                   type={x.type}
-                  cross={this.props.onCross}
+                  onCross={this.handleDeletePlanItem}
                 />
               )
             )
