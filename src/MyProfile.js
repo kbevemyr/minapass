@@ -32,7 +32,7 @@ class MyProfile extends Component {
     return (
       <div>
         <button id="butEdit" className="fab" aria-label="Edit" onClick={this.handleOpenDialog}>
-          <span className="icon add"></span>
+          <span className="icon edit"></span>
         </button>
 
         <div id="MyProfileComponent" className="plan-card">
@@ -43,13 +43,12 @@ class MyProfile extends Component {
           </div>
           <div className="location">{this.props.userdata.bookinguser}</div>
           <div className="description">{this.state.passwordpresentation}</div>
-          <div className="description">{this.props.userdata.bookingpass}</div>
           <div className="description">{this.props.userdata.bookingname}</div>
           <div className="description">{this.props.userdata.bookingfull}</div>
         </div>
 
         {this.state.isDialogMode &&
-          <ProfileDialog onAction={this.handleProfileEditEvent} onAbort={this.handleCloseDialog} />
+          <ProfileDialog userdata={this.props.userdata} onAction={this.handleProfileEditEvent} onAbort={this.handleCloseDialog} />
         }
       </div>
 

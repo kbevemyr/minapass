@@ -25,7 +25,7 @@ class MyPlanItem extends Component {
             <circle cx="16" cy="16" r="14" fill="none"></circle>
           </svg>
         </div>
-        <button className="remove-city" onClick={this.handleDeletePlanItemEvent}>&times;</button>
+        <button className="cross" onClick={this.handleDeletePlanItemEvent}>&times;</button>
         <div className="location">{this.props.day}</div>
         <div className="date">{this.props.time}</div>
         <div className="description">{this.props.type}</div>

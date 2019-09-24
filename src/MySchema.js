@@ -15,9 +15,7 @@ class MySchema extends Component {
 
   render() {
     return (
-      <div>
-        <div>My bookings</div>
-
+      <div className="dynamiccardarea">
       {this.state.isBooked &&
         <div>
           {

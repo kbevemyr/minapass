@@ -14,6 +14,7 @@ class LoginDialog extends Component {
       redirectToReferrer: false,
       unvalue: "",
       pwvalue: "",
+      message: "",
     }
   }
 
@@ -27,7 +28,11 @@ class LoginDialog extends Component {
     loginUser(unvalue, pwvalue)
       .then((res) => {
         console.log("after login "+JSON.stringify(res));
-        this.props.callback(res.sid, () => this.setState({redirectToReferrer: true}));
+        if(res.status === "error") {
+          this.setState({message: res.reason})
+        } else {
+          this.props.callback(res.sid, () => this.setState({redirectToReferrer: true}));
+        }
       });
   }
 
@@ -69,6 +74,7 @@ class LoginDialog extends Component {
                 />
             </div>
             </form>
+            <p>{this.state.message}</p>
           </div>
 
           <div className="dialog-buttons">

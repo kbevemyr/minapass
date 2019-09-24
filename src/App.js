@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import { Route, Link, Redirect, withRouter } from 'react-router-dom';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import { Route, NavLink, Link, Redirect, withRouter } from 'react-router-dom';
+//import './App.css';
 import './inline.css';
 import { getBookingUser, setBookingUser, generateEmptyData } from './UserData';
 
@@ -32,21 +32,11 @@ function PrivateRoute(args) {
   );
 }
 
-function initApp() {
-  /* Init App */
-  // tycker inte att man ska nyttja gammal sid.
-  var cookieSid = document.cookie.replace(/(?:(?:^|.*;\s*)sid\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-  console.log("cookieSid "+cookieSid);
-  if(cookieSid !== "") {
-    //updateUserdata(cookieSid, () => setAuthenticated(true));
-  }
-}
-
-
 // https://kentcdodds.com/blog/application-state-management-with-react
 function App() {
   const [userdata, setUserdata] = useState(generateEmptyData());
   const [isAuthenticated, setAuthenticated] = useState(false);
+  const [updateServer, setUpdateServer] = useState("");
 
   const authenticate = (sid, last) => {
     console.log("authenticate: " + sid);
@@ -58,6 +48,9 @@ function App() {
     console.log("signout");
     setAuthenticated(false);
     setUserdata(generateEmptyData());
+    //alert("redirect: ");
+    //last("/");
+    //this.props.history.push("/");
   }
 
   const updateUserdata = (sid, closeFlowCb) => {
@@ -75,13 +68,27 @@ function App() {
 
   const updatePlan = (newplan, closeFlowCb) => {
     setUserdata((ud) => Object.assign({}, ud, {plan: newplan}));
-    setBookingUser(userdata).then((res) => closeFlowCb());
+    setUpdateServer(closeFlowCb);
   }
 
   const updateProfile = (profiledata, closeFlowCb) => {
     setUserdata((ud) => Object.assign({}, ud, profiledata));
-    setBookingUser(userdata).then((res) => closeFlowCb());
+    setUpdateServer(closeFlowCb);
   }
+
+  useEffect(() => {
+    if (updateServer !== "") {
+      setBookingUser(userdata).then((res) => setUpdateServer(""));
+    }
+  }, [userdata, updateServer]);
+
+/*
+  useEffect(() => {
+    if (!isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }, [isAuthenticated]);
+  */
 
 /*
   const updateBookingUser = (x,y) => {
@@ -100,7 +107,7 @@ function App() {
 
       <header className="header">
         <h1>
-          Mina pass
+          <Link to="/">Mina pass</Link>&nbsp;
           <a href="https://gt16.se/" className="powered-by">
             Powered by GT16
           </a>
@@ -113,22 +120,37 @@ function App() {
       <main className="main">
 
         <div id="about" className="plan-card">
-          <b>App to automate your schedule at Crossfit Norrort</b>
+          <div className="future">
+            <div className="oneday">
+              <NavLink to="/schema" exact activeClassName="custom-active-class">
+                <span className="booking"></span>
+              </NavLink>
+            </div>
 
-          <ul>
-            <li>
-              <Link to="/">Welcome</Link>
-            </li>
-            <li>
+            <div className="oneday">
+              <NavLink to="profile">Min profil</NavLink>
+            </div>
+
+            <div className="oneday">
+              <NavLink to="plan">Min plan</NavLink>
+            </div>
+          </div>
+        </div>
+
+        <div id="about2" className="plan-card">
+          <div className="future">
+            <div className="oneday">
               <Link to="schema">Mina bokningar</Link>
-            </li>
-            <li>
-              <Link to="plan">Min plan</Link>
-            </li>
-            <li>
+            </div>
+
+            <div className="oneday">
               <Link to="profile">Min profil</Link>
-            </li>
-          </ul>
+            </div>
+
+            <div className="oneday">
+              <Link to="plan">Min plan</Link>
+            </div>
+          </div>
         </div>
 
         <Route path="/login"

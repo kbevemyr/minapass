@@ -30,11 +30,14 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  text-align: center;
 }
 
+/**
 html {
   overflow: hidden;
 }
+*/
 
 body {
   align-content: stretch;
@@ -53,12 +56,12 @@ body {
 .header {
   align-content: center;
   align-items: stretch;
-  background: #3f51b5;
+  background: #ffcc66;
   box-shadow:
     0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 2px 9px 1px rgba(0, 0, 0, 0.12),
     0 4px 2px -2px rgba(0, 0, 0, 0.2);
-  color: #fff;
+  color: #101010;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -78,6 +81,8 @@ body {
   font-size: 20px;
   font-weight: 400;
   margin: 0;
+  color: #101010;
+  text-decoration: none;
 }
 
 .header button {
@@ -105,10 +110,31 @@ body {
   background: url(/images/out24px.svg) center center no-repeat;
 }
 
+.header #butProfile {
+  background: url(/images/account_circle-24px.svg) center center no-repeat;
+}
+
+.header #butPlan {
+  background: url(/images/schedule-24px.svg) center center no-repeat;
+}
+
+.header #butBooking {
+  background: url(/images/calendar_today-24px.svg) center center no-repeat;
+}
+
+.header #butUpdate {
+  background: url(/images/update-24px.svg) center center no-repeat;
+}
+
 .header .powered-by {
-  color: white;
+  color: #101010;
   font-size: 0.6em;
   text-decoration: none;
+}
+
+.header a {
+  text-decoration: none;
+  color: #101010;
 }
 
 /**
@@ -176,11 +202,29 @@ body {
 }
 
 .icon.edit {
-  background-image: url("/images/add.svg");
+  background-image: url("/images/edit_24px.svg");
 }
 
 .icon.out {
-  background-image: url("/image/out24ps.svg");
+  background-image: url("/image/out24px.svg");
+}
+
+.icon.profile {
+  background-image: url("/image/account_circle-24px.svg");
+}
+
+.icon.plan {
+  background-image: url("/image/schedule-24px.svg");
+}
+
+.custom-active-class .booking {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("/image/calendar_today-24px.svg");
+}
+
+.icon.update {
+  background-image: url("/image/update-24px.svg");
 }
 
 
@@ -190,13 +234,11 @@ body {
 
 .main {
   flex: 1;
-  overflow-x: hidden;
-  overflow-y: auto;
   padding-top: 60px;
 }
 
 .main .fab {
-  background-color: #3f51b5;
+  background-color: #ffcc66;
   border-radius: 50%;
   bottom: 1rem;
   height: 56px;
@@ -211,6 +253,10 @@ body {
   display: inline-block;
   height: 100%;
   width: 100%;
+}
+.main .dynamiccardarea {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /**
@@ -299,7 +345,7 @@ body {
   position: relative;
 }
 
-.plan-card .remove-city {
+.plan-card .cross {
   background-color: transparent;
   border: none;
   float: right;
@@ -313,34 +359,6 @@ body {
 .plan-card .date,
 .plan-card .description {
   font-size: 1.25em;
-}
-
-.plan-card .current {
-  display: flex;
-}
-
-.plan-card .current .icon {
-  height: 128px;
-  width: 128px;
-}
-
-.plan-card .current .visual {
-  display: flex;
-  font-size: 4em;
-}
-
-.plan-card .current .visual .scale {
-  font-size: 0.5em;
-  vertical-align: super;
-}
-
-.plan-card .current .visual,
-.plan-card .current .description {
-  flex-grow: 1;
-}
-
-.plan-card .current .description .label {
-  color: #666;
 }
 
 .plan-card .future {
@@ -359,13 +377,9 @@ body {
   width: 64px;
 }
 
-.plan-card .future .oneday .temp-high,
-.plan-card .future .oneday .temp-low {
-  display: inline-block;
-}
-
-.plan-card .future .oneday .temp-low {
-  color: #666;
+.plan-card a {
+  text-decoration: none;
+  color: #101010;
 }
 
 /**

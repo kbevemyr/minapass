@@ -40,9 +40,7 @@ class MyPlan extends Component {
 
   render() {
     return (
-      <div>
-        <div>My Plan</div>
-
+      <div className="dynamiccardarea">
         <button id="butAdd" className="fab" aria-label="Add" onClick={this.handleOpenDialog}>
           <span className="icon add"></span>
         </button>
