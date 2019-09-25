@@ -39,6 +39,21 @@ class MyPlan extends Component {
   }
 
   render() {
+    const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    const weekday2index = (d) => weekdays.indexOf(d);
+    const comparePlanItems = (a, b) => {
+      if (a.day !== b.day) {
+        return (weekday2index(a.day) - weekday2index(b.day));
+      } else if (a.time < b.time) {
+        return (1);
+      } else {
+        return (-1);
+      }
+    }
+    var sortedPlan = this.props.userdata.plan.sort(comparePlanItems);
+    //var sortedPlan = this.props.userdata.plan.sort((a,b) => if (a.day !== b.day) { weekday2index(a.day) - weekday2index(b.day) } else if (a.time < b.time) 1 else -1);
+    console.log("sortedplan "+JSON.stringify(sortedPlan));
+
     return (
       <div className="dynamiccardarea">
         <button id="butAdd" className="fab" aria-label="Add" onClick={this.handleOpenDialog}>
@@ -48,7 +63,7 @@ class MyPlan extends Component {
         {this.state.isPlanned &&
         <div>
           {
-            this.props.userdata.plan.map(x =>
+            sortedPlan.map(x =>
               (
                 <MyPlanItem key={x.day+x.time+x.type}
                   day={x.day}
