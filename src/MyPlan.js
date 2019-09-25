@@ -45,9 +45,9 @@ class MyPlan extends Component {
       if (a.day !== b.day) {
         return (weekday2index(a.day) - weekday2index(b.day));
       } else if (a.time < b.time) {
-        return (1);
-      } else {
         return (-1);
+      } else {
+        return (1);
       }
     }
     var sortedPlan = this.props.userdata.plan.sort(comparePlanItems);
