@@ -9,17 +9,20 @@ class MySchema extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isBooked: this.props.userdata.booked !== ""
+      isBooked: this.props.userdata.booked !== "",
     }
   }
 
   render() {
+    var reversedBookings = this.props.userdata.booked.sort();
+    var sortedBookings = reversedBookings.reverse();
+
     return (
       <div className="dynamiccardarea">
       {this.state.isBooked &&
         <div>
           {
-            this.props.userdata.booked.sort().map(x =>
+            sortedBookings.map(x =>
               (
                 <MySchemaItem key={x.date.day+x.time} date={x.date} time={x.time} />
               )
