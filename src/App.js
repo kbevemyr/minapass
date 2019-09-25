@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Route, NavLink, Link, Redirect, withRouter } from 'react-router-dom';
+import { Route, Link, Redirect, withRouter } from 'react-router-dom';
 //import './App.css';
 import './inline.css';
 import { getBookingUser, setBookingUser, generateEmptyData } from './UserData';
