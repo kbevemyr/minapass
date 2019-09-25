@@ -17,7 +17,14 @@ class WeekdayInput extends Component {
   }
 
   render() {
-    const options = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    const options = [{value: 'monday', text: 'måndag'},
+                      {value: 'tuesday', text: 'tisdag'},
+                      {value: 'wednesday', text: 'onsdag'},
+                      {value: 'thursday', text: 'torsdag'},
+                      {value: 'friday', text: 'fredag'},
+                      {value: 'saturday', text: 'lördag'},
+                      {value: 'sunday', text: 'söndag'},
+                    ];
 
     return (
       <div>
@@ -26,11 +33,11 @@ class WeekdayInput extends Component {
             <input type="radio"
               id={index}
               name="planday"
-              value={day}
-              checked={this.state.selectedOption === day}
+              value={day.value}
+              checked={this.state.selectedOption === day.value}
               onChange={this.handleChangeEvent}
             />
-          <label htmlFor="index">{day}</label>
+          <label htmlFor="index">{day.text}</label>
           </div>
         )}
       </div>

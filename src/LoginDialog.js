@@ -78,7 +78,7 @@ class LoginDialog extends Component {
 
               <div className="dialog-buttons">
                 <button type="button" id="butLoginDialogCancel" className="button" onClick={this.handleCancelEvent}>Avbryt</button>
-                <button type="submit" id="butLoginDialogAdd" className="button" onClick={this.handleLoginEvent}>Logga in</button>
+                <button type="button" id="butLoginDialogAdd" className="button" onClick={this.handleLoginEvent}>Logga in</button>
               </div>
             </form>
           </div>

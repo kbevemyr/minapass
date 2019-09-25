@@ -106,14 +106,14 @@ function App() {
     <div className="App">
 
       <header className="header">
-        <Link to="schema"><button id="butBooking" aria-label="Mina bokningar"></button></Link>
-        <Link to="profile"><button id="butProfile" aria-label="Min profil"></button></Link>
-        <Link to="plan"><button id="butPlan" aria-label="Min plan"></button></Link>
+        <Link to="/schema"><button id="butBooking" aria-label="Mina bokningar"></button></Link>
+        <Link to="/profile"><button id="butProfile" aria-label="Min profil"></button></Link>
+        <Link to="/plan"><button id="butPlan" aria-label="Min plan"></button></Link>
 
         <h1>
           <Link to="/">Mina pass</Link>&nbsp;
           <a href="https://gt16.se/" className="powered-by">
-            Powered by GT16
+            by GT16
           </a>
         </h1>
 

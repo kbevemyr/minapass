@@ -33,8 +33,8 @@ class MyPlan extends Component {
   }
 
   handleDeletePlanItem (planitem) {
-    console.log("got handleAddPlanItem "+JSON.stringify(planitem));
-    let newplan = this.props.userdata.plan.filter((x) => {return (x.day !== planitem.day && x.time !== planitem.time && x.type !== planitem.type)});
+    console.log("got handleDeletePlanItem "+JSON.stringify(planitem));
+    let newplan = this.props.userdata.plan.filter((x) => {return (x.day !== planitem.day || x.time !== planitem.time || x.type !== planitem.type)});
     this.props.callback(newplan, () => {console.log("item deleted: "+JSON.stringify(planitem))});
   }
 

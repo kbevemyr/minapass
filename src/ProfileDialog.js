@@ -30,8 +30,8 @@ class ProfileDialog extends Component {
 
           <div className="dialog-body">
 
-            <p>Namn</p>
-              <div className="location">
+            <div className="dialog-title">Namn</div>
+              <div className="unit">
                   <label htmlFor="fnamn">Förnamn</label>
                   <input type="text"
                          id="fnamn"
@@ -40,7 +40,7 @@ class ProfileDialog extends Component {
                          onChange={(e) => this.setState({sBookingName: e.target.value})}
                   />
               </div>
-              <div className="location">
+              <div className="unit">
                   <label htmlFor="enamn">Efternamn</label>
                   <input type="text"
                          id="enamn"
@@ -51,8 +51,8 @@ class ProfileDialog extends Component {
               </div>
 
 
-            <p>Inloggning</p>
-              <div className="location">
+            <div className="dialog-title">Inloggning</div>
+              <div className="unit">
                   <label htmlFor="username">Epost</label>
                   <input type="text"
                          id="username"
@@ -61,7 +61,7 @@ class ProfileDialog extends Component {
                          onChange={(e) => this.setState({sBookingUser: e.target.value})}
                   />
               </div>
-              <div className="location">
+              <div className="unit">
                   <label htmlFor="passwd">Lösenord</label>
                   <input type="password"
                          id="passwd"
