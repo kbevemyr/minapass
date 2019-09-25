@@ -213,14 +213,17 @@ body {
   background-image: url("/image/account_circle-24px.svg");
 }
 
+.icon.schema {
+  background-image: url("/image/calendar_today-24px.svg");
+}
+
 .icon.plan {
   background-image: url("/image/schedule-24px.svg");
 }
 
-.custom-active-class .booking {
+.menuicon {
   background-repeat: no-repeat;
   background-size: contain;
-  background-image: url("/image/calendar_today-24px.svg");
 }
 
 .icon.update {
@@ -257,6 +260,45 @@ body {
 .main .dynamiccardarea {
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+/**
+ * Menu
+ */
+
+.appmenu {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  margin: 16px;
+  padding: 16px;
+  position: relative;
+}
+
+.appmenu .group {
+  display: flex;
+}
+
+.appmenu .group .item {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.appmenu a {
+  text-decoration: none;
+  color: #101010;
+}
+
+.appmenuselected {
+  background-color: beige;
+}
+
+.appmenu a:hover {
+  background-color: beige;
 }
 
 /**
@@ -308,7 +350,13 @@ body {
 .dialog-body {
   padding-bottom: 24px;
   padding-top: 20px;
-  display: block;
+}
+
+.dialog .unit {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-bottom: 8px;
 }
 
 .dialog-body select {
@@ -326,6 +374,10 @@ body {
   border: none;
   font-size: 14px;
   text-transform: uppercase;
+}
+
+.dialog .message {
+  font-size: 1.0em;
 }
 
 /**

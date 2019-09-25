@@ -106,52 +106,23 @@ function App() {
     <div className="App">
 
       <header className="header">
+        <Link to="schema"><button id="butBooking" aria-label="Mina bokningar"></button></Link>
+        <Link to="profile"><button id="butProfile" aria-label="Min profil"></button></Link>
+        <Link to="plan"><button id="butPlan" aria-label="Min plan"></button></Link>
+
         <h1>
           <Link to="/">Mina pass</Link>&nbsp;
           <a href="https://gt16.se/" className="powered-by">
             Powered by GT16
           </a>
         </h1>
+
         <button id="butInstall" aria-label="Install" hidden></button>
         <button id="butRefresh" aria-label="Refresh" onClick={() => nop()}></button>
         <button id="butLogout" aria-label="Logout" onClick={signout}></button>
       </header>
 
       <main className="main">
-
-        <div id="about" className="plan-card">
-          <div className="future">
-            <div className="oneday">
-              <NavLink to="/schema" exact activeClassName="custom-active-class">
-                <span className="booking"></span>
-              </NavLink>
-            </div>
-
-            <div className="oneday">
-              <NavLink to="profile">Min profil</NavLink>
-            </div>
-
-            <div className="oneday">
-              <NavLink to="plan">Min plan</NavLink>
-            </div>
-          </div>
-        </div>
-
-        <div id="about2" className="plan-card">
-          <div className="future">
-            <div className="oneday">
-              <Link to="schema">Mina bokningar</Link>
-            </div>
-
-            <div className="oneday">
-              <Link to="profile">Min profil</Link>
-            </div>
-
-            <div className="oneday">
-              <Link to="plan">Min plan</Link>
-            </div>
-          </div>
-        </div>
 
         <Route path="/login"
           render={() => <LoginDialog callback={ authenticate }/>}

@@ -52,34 +52,35 @@ class LoginDialog extends Component {
           <div className="dialog-title">Logga in</div>
           <div className="dialog-body">
             <form>
-            <div className="location">
-                <label htmlFor="username">Epost</label>
-                <input type="text"
-                       autoComplete="username"
-                       id="username"
-                       name="username"
-                       onChange={(e) => this.setState({unvalue: e.target.value})}
-                />
-            </div>
+              <div className="unit">
+                  <label htmlFor="username">Epost</label>
+                  <input type="text"
+                         autoComplete="username"
+                         id="username"
+                         name="username"
+                         onChange={(e) => this.setState({unvalue: e.target.value})}
+                  />
+              </div>
 
-            <div className="location">
-                <label htmlFor="passwd">Lösenord</label>
-                <input type="password"
-                       autoComplete="current-password"
-                       id="passwd"
-                       name="passwd"
-                       minLength="8"
-                       required
-                       onChange={(e) => this.setState({pwvalue: e.target.value})}
-                />
-            </div>
+              <div className="unit">
+                  <label htmlFor="passwd">Lösenord</label>
+                  <input type="password"
+                         autoComplete="current-password"
+                         id="passwd"
+                         name="passwd"
+                         minLength="8"
+                         required
+                         onChange={(e) => this.setState({pwvalue: e.target.value})}
+                  />
+              </div>
+
+              <p className="message">{this.state.message}</p>
+
+              <div className="dialog-buttons">
+                <button type="button" id="butLoginDialogCancel" className="button" onClick={this.handleCancelEvent}>Avbryt</button>
+                <button type="submit" id="butLoginDialogAdd" className="button" onClick={this.handleLoginEvent}>Logga in</button>
+              </div>
             </form>
-            <p>{this.state.message}</p>
-          </div>
-
-          <div className="dialog-buttons">
-            <button id="butLoginDialogCancel" className="button" onClick={this.handleCancelEvent}>Avbryt</button>
-            <button id="butLoginDialogAdd" className="button" onClick={this.handleLoginEvent}>Logga in</button>
           </div>
         </div>
       </div>
