@@ -54,15 +54,20 @@ function App() {
   }
 
   const updateUserdata = (sid, closeFlowCb) => {
-    getBookingUser(sid).then((data) => {
-      if(data.plan === "") {
-        data.plan = [];
-      }
-      if(data.booked === "") {
-        data.booked = [];
-      }
-      setUserdata(data);
-      closeFlowCb(); //tänkt att den stänger inmatningsdialogen, bra?
+    getBookingUser(sid)
+      .then((res) => { // check for error
+        if(res.status === "error") {
+          console.log("after getBookingUser: "+res.reason);
+        } else {
+          if(res.user.plan === "") {
+            res.user.plan = [];
+          }
+          if(res.user.booked === "") {
+            res.user.booked = [];
+          }
+          setUserdata(res.user);
+          closeFlowCb(); //tänkt att den stänger inmatningsdialogen, bra?
+        }
     });
   }
 
@@ -78,7 +83,14 @@ function App() {
 
   useEffect(() => {
     if (updateServer !== "") {
-      setBookingUser(userdata).then((res) => setUpdateServer(""));
+      setBookingUser(userdata)
+        .then((res) => {
+          if(res.status === "error") {
+            console.log("after setBookingUser: "+res.reason);
+          } else {
+            setUpdateServer("");
+          }
+        });
     }
   }, [userdata, updateServer]);
 
