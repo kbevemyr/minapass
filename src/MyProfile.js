@@ -41,10 +41,13 @@ class MyProfile extends Component {
               <circle cx="16" cy="16" r="14" fill="none"></circle>
             </svg>
           </div>
-          <div className="location">{this.props.userdata.bookinguser}</div>
+          <div className="description1">{this.props.userdata.bookinguser}</div>
           <div className="description">{this.state.passwordpresentation}</div>
           <div className="description">{this.props.userdata.bookingname}</div>
           <div className="description">{this.props.userdata.bookingfull}</div>
+          {this.props.userdata.paused === "true" &&
+            <div className="description">Schemläggningen är inaktiverad</div>
+          }
         </div>
 
         {this.state.isDialogMode &&

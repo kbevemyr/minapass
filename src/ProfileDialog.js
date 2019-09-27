@@ -12,12 +12,19 @@ class ProfileDialog extends Component {
       sBookingPass: this.props.userdata.bookingpass,
       sBookingName: this.props.userdata.bookingname,
       sBookingFull: this.props.userdata.bookingfull,
+      sPaused: this.props.userdata.paused,
     }
   }
 
   handleDialogActionEvent() {
     console.log("got DialogActionEvent");
-    let newProfileData = {"record_name": "user", "bookinguser": this.state.sBookingUser,"bookingpass": this.state.sBookingPass, "bookingname": this.state.sBookingName, "bookingfull": this.state.sBookingFull};
+    let newProfileData = {"record_name": "user",
+      "bookinguser": this.state.sBookingUser,
+      "bookingpass": this.state.sBookingPass,
+      "bookingname": this.state.sBookingName,
+      "bookingfull": this.state.sBookingFull,
+      "paused": this.state.sPaused,
+    };
     this.props.onAbort();
     this.props.onAction(newProfileData);
   }
@@ -26,11 +33,11 @@ class ProfileDialog extends Component {
     return (
       <div id="ProfileDialogComponent">
         <div className="dialog">
-          <div className="dialog-title">Uppdatera Norrort Profil</div>
+          <div className="dialog-title">Uppdatera din Norrort-profil</div>
 
           <div className="dialog-body">
 
-            <div className="dialog-title">Namn</div>
+            <div className="unit-title">Namn</div>
               <div className="unit">
                   <label htmlFor="fnamn">Förnamn</label>
                   <input type="text"
@@ -51,7 +58,7 @@ class ProfileDialog extends Component {
               </div>
 
 
-            <div className="dialog-title">Inloggning</div>
+            <div className="unit-title">Inloggning</div>
               <div className="unit">
                   <label htmlFor="username">Epost</label>
                   <input type="text"
@@ -73,6 +80,18 @@ class ProfileDialog extends Component {
                   />
               </div>
 
+              <div className="unit-title">Schemaläggning</div>
+                <div className="unitH">
+                  <input type="checkbox"
+                         id="pause"
+                         name="pause"
+                         value={this.state.sPaused}
+                         onChange={(e) => this.setState({sPaused: e.target.value})}
+                    />
+                  <label htmlFor="pause">Inaktivera</label>
+                </div>
+              </div>
+
 
               <div className="dialog-buttons">
                 <button
@@ -89,7 +108,6 @@ class ProfileDialog extends Component {
                 </button>
               </div>
 
-          </div>
         </div>
       </div>
     );

@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 
 import './inline.css';
+const passTypes = [{value: 'coach', text:'Grupppass'},
+                   {value: 'manned', text:'Bemannat gym'},
+                   {value: 'keycard', text:'Obemannat gym'},
+                   {value: 'kids', text:'Barnpass'},
+                   {value: 'competition', text:'Tävling'},
+                 ];
 
 class MyPlanItem extends Component {
   constructor(props) {
@@ -28,7 +34,7 @@ class MyPlanItem extends Component {
         <button className="cross" onClick={this.handleDeletePlanItemEvent}>&times;</button>
         <div className="location">{this.props.day}</div>
         <div className="date">{this.props.time}</div>
-        <div className="description">{this.props.type}</div>
+        <div className="description">{passTypes.find(x => x.value === this.props.type).text}</div>
       </div>
     );
   }

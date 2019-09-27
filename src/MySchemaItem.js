@@ -10,7 +10,7 @@ class MySchemaItem extends Component {
     this.state = {
       date: new Date(year, (month-1), day),
       locale: "sv-sv",
-      options: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
+      options: { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' },
     }
   }
 
@@ -23,7 +23,7 @@ class MySchemaItem extends Component {
           </svg>
         </div>
         <div className="location">{this.state.date.toLocaleDateString(this.state.locale, this.state.options)}</div>
-        <div className="date">{this.props.time}</div>
+        <div className="description">{this.props.time}</div>
       </div>
     );
   }

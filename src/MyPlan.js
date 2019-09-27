@@ -50,9 +50,8 @@ class MyPlan extends Component {
         return (1);
       }
     }
+    
     var sortedPlan = this.props.userdata.plan.sort(comparePlanItems);
-    //var sortedPlan = this.props.userdata.plan.sort((a,b) => if (a.day !== b.day) { weekday2index(a.day) - weekday2index(b.day) } else if (a.time < b.time) 1 else -1);
-    console.log("sortedplan "+JSON.stringify(sortedPlan));
 
     return (
       <div className="dynamiccardarea">

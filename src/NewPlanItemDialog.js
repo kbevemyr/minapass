@@ -4,6 +4,13 @@ import WeekdayInput from './WeekdayInput';
 
 import './inline.css';
 
+const passTypes = [{value: 'coach', text:'Grupppass'},
+                   {value: 'manned', text:'Bemannat gym'},
+                   {value: 'keycard', text:'Obemannat gym'},
+                   {value: 'kids', text:'Barnpass'},
+                   {value: 'competition', text:'Tävling'},
+                 ];
+
 class NewPlanItemDialog extends Component {
   constructor(props) {
     super(props);
@@ -35,13 +42,14 @@ class NewPlanItemDialog extends Component {
           <div className="dialog-title">Ny plan</div>
 
           <div className="dialog-body">
+
             <div className="unit">
-              <p>Välj en dag</p>
+              <label>Välj en dag</label>
               <WeekdayInput onChange={(v) => this.setState({sDay: v})}/>
             </div>
 
             <div className="unit">
-              <p>Välj en tid</p>
+              <label htmlFor="plantime">Välj en tid</label>
               <input required
                 type="time"
                 id="plantime"
@@ -51,33 +59,41 @@ class NewPlanItemDialog extends Component {
             </div>
 
             <div className="unit">
-                <p>Välj en klass</p>
-                <select required id="selectPassType" defaultValue="coach" onChange={(e) => this.setState({sType: e.target.value})} aria-label="Pass type">
-                  <option value="coach">Group</option>
-                  <option value="manned">Open gym</option>
-                  <option value="keycard">Locked gym</option>
-                  <option value="kids">Kids</option>
-                  <option value="competition">Competition</option>
+                <label htmlFor="passtype">Välj en klass</label>
+                <select required id="selectPassType"
+                  name="passtype"
+                  defaultValue="coach"
+                  onChange={(e) => this.setState({sType: e.target.value})}
+                  aria-label="Pass type"
+                >
+                  {passTypes.map((x) =>
+                    <option value={x.value}>{x.text}</option>
+                    )
+                  }
                 </select>
             </div>
 
-            <p className="message">{this.state.message}</p>
+            {this.state.message !== "" &&
+              <div className="unit">
+                <p className="message">{this.state.message}</p>
+              </div>
+            }
 
-            <div className="dialog-buttons">
-              <button
-                id="butDialogCancel"
-                className="button"
-                onClick={this.props.onAbort} >
-                  Avbryt
-              </button>
-              <button
-                id="butDialogAdd"
-                className="button"
-                onClick={this.handleAddPlanItemEvent} >
-                  Lägg till
-              </button>
-            </div>
+          </div>
 
+          <div className="dialog-buttons">
+            <button
+              id="butDialogCancel"
+              className="button"
+              onClick={this.props.onAbort} >
+                Avbryt
+            </button>
+            <button
+              id="butDialogAdd"
+              className="button"
+              onClick={this.handleAddPlanItemEvent} >
+                Lägg till
+            </button>
           </div>
         </div>
       </div>

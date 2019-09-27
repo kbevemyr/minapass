@@ -14,15 +14,21 @@ class MySchema extends Component {
   }
 
   render() {
-    var reversedBookings = this.props.userdata.booked.sort();
-    var sortedBookings = reversedBookings.reverse();
+    const compareBookings = (a,b) => {
+      let aTimeValue = a.time.split(':');
+      let aValue = a.date.year*10000000+a.date.month*100000+a.date.day*1000+aTimeValue[0]*100+aTimeValue[1];
+      let bTimeValue = a.time.split(':');
+      let bValue = b.date.year*10000000+b.date.month*100000+b.date.day*1000+bTimeValue[0]*100+bTimeValue[1];
+
+      return aValue - bValue;
+    }
 
     return (
       <div className="dynamiccardarea">
       {this.state.isBooked &&
         <div>
           {
-            sortedBookings.map(x =>
+            this.props.userdata.booked.sort(compareBookings).map(x =>
               (
                 <MySchemaItem key={x.date.day+x.time} date={x.date} time={x.time} />
               )

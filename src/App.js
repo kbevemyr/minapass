@@ -32,6 +32,7 @@ function PrivateRoute(args) {
   );
 }
 
+
 // https://kentcdodds.com/blog/application-state-management-with-react
 function App() {
   const [userdata, setUserdata] = useState(generateEmptyData());
@@ -40,12 +41,14 @@ function App() {
 
   const authenticate = (sid, last) => {
     console.log("authenticate: " + sid);
+    window.localStorage.setItem('mysid', sid);
     setAuthenticated(true);
     updateUserdata(sid, last);
   }
 
   const signout = () => {
     console.log("signout");
+    window.localStorage.removeItem('mysid');
     setAuthenticated(false);
     setUserdata(generateEmptyData());
     //alert("redirect: ");
@@ -81,6 +84,14 @@ function App() {
     setUpdateServer(closeFlowCb);
   }
 
+  const checkIsAuthenticated = () => {
+    var mysid = window.localStorage.getItem('mysid');
+    console.log("mysid from localstorage: "+mysid);
+    if (mysid) {
+      updateUserdata(mysid, setAuthenticated(true));
+    }
+  }
+
   useEffect(() => {
     if (updateServer !== "") {
       setBookingUser(userdata)
@@ -114,6 +125,8 @@ function App() {
     console.log("nop");
   }
 
+  //checkIsAuthenticated();
+
   return (
     <div className="App">
 
@@ -130,7 +143,7 @@ function App() {
         </h1>
 
         <button id="butInstall" aria-label="Install" hidden></button>
-        <button id="butRefresh" aria-label="Refresh" onClick={() => nop()}></button>
+        <button id="butRefresh" aria-label="Refresh" hidden onClick={() => nop()}></button>
         <button id="butLogout" aria-label="Logout" onClick={signout}></button>
       </header>
 

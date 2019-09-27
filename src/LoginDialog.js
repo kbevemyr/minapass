@@ -36,6 +36,10 @@ class LoginDialog extends Component {
       });
   }
 
+  handleKeyEvent() {
+
+  }
+
   render() {
     let { from } = this.props.location.state || { from: { pathname: "/" } };
     let { redirectToReferrer } = this.state;
@@ -50,38 +54,43 @@ class LoginDialog extends Component {
       <div id="LoginDialogComponent">
         <div className="dialog">
           <div className="dialog-title">Logga in</div>
-          <div className="dialog-body">
-            <form>
-              <div className="unit">
-                  <label htmlFor="username">Epost</label>
-                  <input type="text"
-                         autoComplete="username"
-                         id="username"
-                         name="username"
-                         onChange={(e) => this.setState({unvalue: e.target.value})}
-                  />
-              </div>
+            <div className="dialog-body">
 
-              <div className="unit">
-                  <label htmlFor="passwd">Lösenord</label>
-                  <input type="password"
-                         autoComplete="current-password"
-                         id="passwd"
-                         name="passwd"
-                         minLength="8"
-                         required
-                         onChange={(e) => this.setState({pwvalue: e.target.value})}
-                  />
-              </div>
+                <div className="unit">
+                    <label htmlFor="username">Epost</label>
+                    <input type="text"
+                      tabIndex="1"
+                      autoComplete="username"
+                      id="username"
+                      name="username"
+                      onChange={(e) => this.setState({unvalue: e.target.value})}
+                    />
+                </div>
 
-              <p className="message">{this.state.message}</p>
+                <div className="unit">
+                    <label htmlFor="passwd">Lösenord</label>
+                    <input type="password"
+                           tabIndex="2"
+                           autoComplete="current-password"
+                           id="passwd"
+                           name="passwd"
+                           minLength="8"
+                           required
+                           onChange={(e) => this.setState({pwvalue: e.target.value})}
+                    />
+                </div>
 
-              <div className="dialog-buttons">
-                <button type="button" id="butLoginDialogCancel" className="button" onClick={this.handleCancelEvent}>Avbryt</button>
-                <button type="button" id="butLoginDialogAdd" className="button" onClick={this.handleLoginEvent}>Logga in</button>
-              </div>
-            </form>
-          </div>
+                {this.state.message !== "" &&
+                  <div className="unit">
+                    <p className="message">{this.state.message}</p>
+                  </div>
+                }
+
+                <div className="dialog-buttons">
+                  <button type="button" tabIndex="4" id="butLoginDialogCancel" className="button" onClick={this.handleCancelEvent}>Avbryt</button>
+                  <button type="button" tabIndex="3" id="butLoginDialogAdd" className="button" onClick={this.handleLoginEvent}>Logga in</button>
+                </div>
+            </div>
         </div>
       </div>
     );

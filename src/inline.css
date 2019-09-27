@@ -238,6 +238,8 @@ body {
 .main {
   flex: 1;
   padding-top: 60px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .main .fab {
@@ -256,10 +258,6 @@ body {
   display: inline-block;
   height: 100%;
   width: 100%;
-}
-.main .dynamiccardarea {
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 /**
@@ -302,26 +300,8 @@ body {
 }
 
 /**
- * Add dialog
+ * Dialog
  */
-
-#addDialogContainer {
-  background: rgba(0, 0, 0, 0.57);
-  height: 100%;
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
-  width: 100%;
-  will-change: opacity;
-}
-
-#addDialogContainer.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
 
 .dialog {
   background: #fff;
@@ -332,9 +312,10 @@ body {
   left: 50%;
   min-width: 280px;
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: translate(-50%, -50%) translateY(30px);
   transition: transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s;
+  z-index: 1001;
 }
 
 .dialog > div {
@@ -345,11 +326,12 @@ body {
 .dialog-title {
   font-size: 1.25em;
   padding-top: 20px;
+  padding-bottom: 8px;
 }
 
 .dialog-body {
-  padding-bottom: 24px;
-  padding-top: 20px;
+  padding-top: 8px;
+  padding-bottom: 0px;
 }
 
 .dialog .unit {
@@ -359,13 +341,26 @@ body {
   padding-bottom: 8px;
 }
 
+.dialog .unitH {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  padding-bottom: 8px;
+}
+.unit-title {
+  font-size: 1.25em;
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+
 .dialog-body select {
   width: 100%;
 }
 
 .dialog-buttons {
   float: right;
-  padding-bottom: 16px;
+  padding-top: 8px;
+  padding-bottom: 20px;
   padding-right: 17px !important;
 }
 
@@ -404,11 +399,11 @@ body {
   font-size: x-large;
 }
 
-.plan-card .location {
+.plan-card .location,
+.plan-card .description1 {
   font-size: 1.75em;
 }
 
-.plan-card .date,
 .plan-card .description {
   font-size: 1.25em;
 }
