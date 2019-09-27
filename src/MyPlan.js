@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import './inline.css';
 
+
 import NewPlanItemDialog from './NewPlanItemDialog';
 import MyPlanItem from './MyPlanItem';
 
@@ -50,7 +51,7 @@ class MyPlan extends Component {
         return (1);
       }
     }
-    
+
     var sortedPlan = this.props.userdata.plan.sort(comparePlanItems);
 
     return (

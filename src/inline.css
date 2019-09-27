@@ -408,6 +408,10 @@ body {
   font-size: 1.25em;
 }
 
+.plan-card .group {
+  display: flow-root;
+}
+
 .plan-card .future {
   display: flex;
 }

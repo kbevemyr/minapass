@@ -9,6 +9,16 @@ const passTypes = [{value: 'coach', text:'Grupppass'},
                    {value: 'competition', text:'Tävling'},
                  ];
 
+const weekdaysText = [
+                   {value: 'monday', text:'måndag'},
+                   {value: 'tuesday', text:'tisdag'},
+                   {value: 'wednesday', text:'onsdag'},
+                   {value: 'thursday', text:'torsdag'},
+                   {value: 'friday', text:'fredag'},
+                   {value: 'saturday', text:'lördag'},
+                   {value: 'sunday', text:'söndag'},
+                 ];
+
 class MyPlanItem extends Component {
   constructor(props) {
     super(props);
@@ -32,9 +42,11 @@ class MyPlanItem extends Component {
           </svg>
         </div>
         <button className="cross" onClick={this.handleDeletePlanItemEvent}>&times;</button>
-        <div className="location">{this.props.day}</div>
-        <div className="date">{this.props.time}</div>
+        <div className="group">
+        <div className="location">{weekdaysText.find(x => x.value === this.props.day).text}</div>
+        <div className="description">{this.props.time}</div>
         <div className="description">{passTypes.find(x => x.value === this.props.type).text}</div>
+        </div>
       </div>
     );
   }
