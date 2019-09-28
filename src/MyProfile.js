@@ -24,7 +24,7 @@ class MyProfile extends Component {
   }
 
   handleProfileEditEvent (x) {
-    console.log("got handleAddPlanItem "+JSON.stringify(x));
+    console.log("got handleProfileEditEvent "+JSON.stringify(x));
     this.props.callback(x, this.handleCloseDialog);
   }
 

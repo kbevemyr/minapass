@@ -86,7 +86,7 @@ class ProfileDialog extends Component {
                          id="pause"
                          name="pause"
                          value={this.state.sPaused}
-                         onChange={(e) => this.setState({sPaused: e.target.value})}
+                         onChange={(e) => this.setState({sPaused: e.target.checked})}
                     />
                   <label htmlFor="pause">Inaktivera</label>
                 </div>
