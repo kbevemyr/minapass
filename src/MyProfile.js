@@ -45,7 +45,7 @@ class MyProfile extends Component {
           <div className="description">{this.state.passwordpresentation}</div>
           <div className="description">{this.props.userdata.bookingname}</div>
           <div className="description">{this.props.userdata.bookingfull}</div>
-          {this.props.userdata.paused === "true" &&
+          {this.props.userdata.paused &&
             <div className="description">Schemläggningen är inaktiverad</div>
           }
         </div>

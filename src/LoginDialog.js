@@ -8,7 +8,9 @@ import './inline.css';
 class LoginDialog extends Component {
   constructor(props) {
     super(props);
+    this.handleCancelEvent = this.handleCancelEvent.bind(this);
     this.handleLoginEvent = this.handleLoginEvent.bind(this);
+    this.handleKeyEvent = this.handleKeyEvent.bind(this);
     console.log("LoginDialog constructor");
     this.state = {
       redirectToReferrer: false,
@@ -24,10 +26,10 @@ class LoginDialog extends Component {
 
   handleLoginEvent() {
     const {unvalue, pwvalue} = this.state;
-    console.log("got LoginEvent");
+    //console.log("got LoginEvent");
     loginUser(unvalue, pwvalue)
       .then((res) => {
-        console.log("after login "+JSON.stringify(res));
+        //console.log("after login "+JSON.stringify(res));
         if(res.status === "error") {
           this.setState({message: res.reason})
         } else {
@@ -36,8 +38,11 @@ class LoginDialog extends Component {
       });
   }
 
-  handleKeyEvent() {
-
+  handleKeyEvent(e) {
+    //console.log("got keyEvent: "+e.key);
+    if(e.key === 'Enter') {
+      this.handleLoginEvent();
+    }
   }
 
   render() {
@@ -55,7 +60,7 @@ class LoginDialog extends Component {
         <div className="dialog">
           <div className="dialog-title">Logga in</div>
             <div className="dialog-body">
-
+              <form>
                 <div className="unit">
                     <label htmlFor="username">Epost</label>
                     <input type="text"
@@ -76,6 +81,7 @@ class LoginDialog extends Component {
                            name="passwd"
                            minLength="8"
                            required
+                           onKeyDown={this.handleKeyEvent}
                            onChange={(e) => this.setState({pwvalue: e.target.value})}
                     />
                 </div>
@@ -90,6 +96,7 @@ class LoginDialog extends Component {
                   <button type="button" tabIndex="4" id="butLoginDialogCancel" className="button" onClick={this.handleCancelEvent}>Avbryt</button>
                   <button type="button" tabIndex="3" id="butLoginDialogAdd" className="button" onClick={this.handleLoginEvent}>Logga in</button>
                 </div>
+              </form>
             </div>
         </div>
       </div>

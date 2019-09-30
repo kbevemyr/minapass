@@ -85,7 +85,7 @@ class ProfileDialog extends Component {
                   <input type="checkbox"
                          id="pause"
                          name="pause"
-                         value={this.state.sPaused}
+                         checked={this.state.sPaused}
                          onChange={(e) => this.setState({sPaused: e.target.checked})}
                     />
                   <label htmlFor="pause">Inaktivera</label>
