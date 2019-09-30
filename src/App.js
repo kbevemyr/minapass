@@ -88,7 +88,21 @@ function App() {
     var mysid = window.localStorage.getItem('mysid');
     console.log("mysid from localstorage: "+mysid);
     if (mysid) {
-      updateUserdata(mysid, setAuthenticated(true));
+      getBookingUser(mysid)
+        .then((res) => { // check for error
+          if(res.status === "error") {
+            console.log("after getBookingUser: "+res.reason);
+          } else {
+            if(res.user.plan === "") {
+              res.user.plan = [];
+            }
+            if(res.user.booked === "") {
+              res.user.booked = [];
+            }
+            setUserdata(res.user);
+            setAuthenticated(true);
+          }
+      });
     }
   }
 
@@ -105,13 +119,10 @@ function App() {
     }
   }, [userdata, updateServer]);
 
-/*
   useEffect(() => {
-    if (!isAuthenticated) {
-      this.props.history.push("/");
-    }
-  }, [isAuthenticated]);
-  */
+    console.log("effect []");
+    checkIsAuthenticated();
+  }, []); // Empty array ensures that effect is only run on mount and unmountnly
 
 /*
   const updateBookingUser = (x,y) => {
@@ -119,13 +130,11 @@ function App() {
     setBookingUser(x,y).then((res) => console.log("done updateBookingUser"));
     // on det blir fel så hämta nytt från servern?
   }
-  */
+*/
 
   const nop = () => {
     console.log("nop");
   }
-
-  //checkIsAuthenticated();
 
   return (
     <div className="App">
@@ -143,14 +152,21 @@ function App() {
         </h1>
 
         <button id="butInstall" aria-label="Install" hidden></button>
-        <button id="butRefresh" aria-label="Refresh" hidden onClick={() => nop()}></button>
+        <button id="butRefresh" aria-label="Refresh" onClick={() => nop()}></button>
         <button id="butLogout" aria-label="Logout" onClick={signout}></button>
       </header>
 
       <main className="main">
 
         <Route path="/login"
-          render={() => <LoginDialog callback={ authenticate }/>}
+          render={() => (
+            isAuthenticated ? (
+              <Redirect to="/schema" />
+              ) : (
+                <LoginDialog callback={ authenticate }/>
+              )
+            )
+          }
         />
         <Route path="/"
           exact component={Splash}
