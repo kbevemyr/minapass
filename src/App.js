@@ -51,9 +51,10 @@ function App() {
     window.localStorage.removeItem('mysid');
     setAuthenticated(false);
     setUserdata(generateEmptyData());
-    //alert("redirect: ");
-    //last("/");
-    //this.props.history.push("/");
+  }
+
+  const refresh = () => {
+    updateUserdata(userdata.sid, () => nop());
   }
 
   const updateUserdata = (sid, closeFlowCb) => {
@@ -69,7 +70,7 @@ function App() {
             res.user.booked = [];
           }
           setUserdata(res.user);
-          closeFlowCb(); //tänkt att den stänger inmatningsdialogen, bra?
+          closeFlowCb(); //tänkt att den stänger inmatningsdialogen
         }
     });
   }
@@ -88,21 +89,7 @@ function App() {
     var mysid = window.localStorage.getItem('mysid');
     console.log("mysid from localstorage: "+mysid);
     if (mysid) {
-      getBookingUser(mysid)
-        .then((res) => { // check for error
-          if(res.status === "error") {
-            console.log("after getBookingUser: "+res.reason);
-          } else {
-            if(res.user.plan === "") {
-              res.user.plan = [];
-            }
-            if(res.user.booked === "") {
-              res.user.booked = [];
-            }
-            setUserdata(res.user);
-            setAuthenticated(true);
-          }
-      });
+      updateUserdata(mysid, () => setAuthenticated(true));
     }
   }
 
@@ -152,7 +139,7 @@ function App() {
         </h1>
 
         <button id="butInstall" aria-label="Install" hidden></button>
-        <button id="butRefresh" aria-label="Refresh" onClick={() => nop()}></button>
+        <button id="butRefresh" aria-label="Refresh" onClick={refresh}></button>
         <button id="butLogout" aria-label="Logout" onClick={signout}></button>
       </header>
 
