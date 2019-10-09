@@ -33,6 +33,7 @@ class LoginDialog extends Component {
         if(res.status === "error") {
           this.setState({message: res.reason})
         } else {
+          // The callback in the callback should be removed
           this.props.callback(res.sid, () => this.setState({redirectToReferrer: true}));
         }
       });

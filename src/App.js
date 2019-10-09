@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Route, Link, Redirect, withRouter } from 'react-router-dom';
 //import './App.css';
 import './inline.css';
-import { getBookingUser, setBookingUser, generateEmptyData } from './UserData';
+import { getBookingUser, setBookingUser, generateEmptyData, bookUser } from './UserData';
 
 import Splash from './Splash';
 import MyProfile from './MyProfile';
@@ -98,9 +98,16 @@ function App() {
       setBookingUser(userdata)
         .then((res) => {
           if(res.status === "error") {
-            console.log("after setBookingUser: "+res.reason);
+            console.log("error setBookingUser: "+res.reason);
           } else {
             setUpdateServer("");
+            // instruct servers side to perform a booking
+            bookUser(userdata.sid)
+              .then((res) => {
+                if(res.status === "error") {
+                  console.log("error bookUser: "+res.reason);
+                }
+            });
           }
         });
     }
@@ -148,7 +155,7 @@ function App() {
         <Route path="/login"
           render={() => (
             isAuthenticated ? (
-              <Redirect to="/schema" />
+                <Redirect to="/schema" />
               ) : (
                 <LoginDialog callback={ authenticate }/>
               )

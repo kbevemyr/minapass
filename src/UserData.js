@@ -1,4 +1,10 @@
 /*
+  config section for server access
+*/
+const urlBase = "//crossfit.bevemyr.com";
+const urlProtocol = window.location.protocol;
+
+/*
   handle UserData
 */
 
@@ -60,7 +66,8 @@ export function generateEmptyData() {
 
 export function getBookingUser(sid) {
   console.log("getBookingUser: "+sid);
-  const adr="http://crossfit.bevemyr.com/crossfit/get_user";
+  //const adr="http://crossfit.bevemyr.com/crossfit/get_user";
+  const adr = urlProtocol + urlBase + "/crossfit/get_user";
   const url=adr+"?sid="+sid;
   return fetch(url)
     .then((response) => {
@@ -74,7 +81,8 @@ export function getBookingUser(sid) {
 export function setBookingUser(userdata) {
   let sid = userdata.sid;
   console.log("setBookingUser: "+sid);
-  const adr="http://crossfit.bevemyr.com/crossfit/set_user";
+  //const adr="http://crossfit.bevemyr.com/crossfit/set_user";
+  const adr = urlProtocol + urlBase + "/crossfit/set_user";
   const url=adr+"?sid="+sid;
   return fetch(url, {
       method: 'POST',
@@ -93,8 +101,18 @@ export function setBookingUser(userdata) {
 
 export function loginUser(username, passwd) {
   console.log("loginUser: "+username);
-  const adr="http://crossfit.bevemyr.com/crossfit/login";
+  //const adr="http://crossfit.bevemyr.com/crossfit/login";
+  const adr = urlProtocol + urlBase + "/crossfit/login";
   const url=adr+"?user="+username+"&password="+passwd;
+  return fetch(url)
+    .then(response => response.json());
+}
+
+export function bookUser(sid) {
+  console.log("bookUser: "+sid);
+  //const adr="http://crossfit.bevemyr.com/crossfit/book_user";
+  const adr = urlProtocol + urlBase + "/crossfit/book_user";
+  const url=adr+"?sid="+sid;
   return fetch(url)
     .then(response => response.json());
 }
